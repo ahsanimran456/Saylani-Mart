@@ -24,6 +24,7 @@ import {
 
 function App() {
   return (
+
     // <SafeAreaView style={backgroundStyle}>
     //   <StatusBar
     //     barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -54,6 +55,7 @@ function App() {
     //     </View>
     //   </ScrollView>
     // </SafeAreaView>
+    
     <View>
       <Text>
         hello
