@@ -8,7 +8,7 @@ function Router() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Splash" component={Splash} 
+                <Stack.Screen name="Splash" component={Login} 
                 options={{
                     headerShown:false
                 }}

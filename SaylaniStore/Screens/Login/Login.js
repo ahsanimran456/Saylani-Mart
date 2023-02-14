@@ -6,15 +6,28 @@ import {
     Text,
     useColorScheme,
     View,
-  } from 'react-native';
+    setNativeProps,
+} from 'react-native';
+import { useEffect, useRef } from 'react';
+import Splash from '../Splash/Splash';
 function Login() {
-    return ( 
-        <View>
-            <Text>
-                hello home
-            </Text>
-        </View>
-     );
+    const splashscreen = useRef();
+    useEffect(() => {
+        setTimeout(() => {
+            console.log(splashscreen.current.setNativeProps({
+                style: {
+                    display:"none"
+                }
+            }))
+
+        }, 2000);
+    }, []);
+    return (
+        <SafeAreaView style={{ backgroundColor: "red", flex: 1 }}>
+            <Splash ref={splashscreen} />
+        </SafeAreaView>
+
+    );
 }
 
 export default Login;
