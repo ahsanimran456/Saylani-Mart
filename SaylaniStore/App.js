@@ -17,6 +17,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Router from './Router/Router';
+
 
 
 
@@ -24,8 +26,41 @@ import {
 
 function App() {
   return (
+    // <SafeAreaView style={{flex:1}}>
+      <View style={{flex:1}}>
+        <Router />
+      </View>
+    // </SafeAreaView>
+      // <View style={{flex:1}}>
+      //   <Router />
+      // </View>
+  );
+}
 
-    // <SafeAreaView style={backgroundStyle}>
+const styles = StyleSheet.create({
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+});
+
+export default App;
+
+
+
+ // <SafeAreaView style={backgroundStyle}>
     //   <StatusBar
     //     barStyle={isDarkMode ? 'light-content' : 'dark-content'}
     //     backgroundColor={backgroundStyle.backgroundColor}
@@ -55,32 +90,3 @@ function App() {
     //     </View>
     //   </ScrollView>
     // </SafeAreaView>
-    
-    <View>
-      <Text>
-        hello
-      </Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
