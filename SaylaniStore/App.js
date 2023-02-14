@@ -31,9 +31,6 @@ function App() {
         <Router />
       </View>
     // </SafeAreaView>
-      // <View style={{flex:1}}>
-      //   <Router />
-      // </View>
   );
 }
 

@@ -1,4 +1,5 @@
 import {
+    Image,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -11,9 +12,9 @@ function Splash() {
     return (
         <View style={styles.main_splash}>
             <View style={{ backgroundColor: "red" }}>
-                <Text>
-                    splash screen sadsads
-                </Text>
+                <View >
+                    <Image source={require("../../Assets/images/Frame.png")} />
+                </View>
             </View>
         </View>
     );
