@@ -33,7 +33,7 @@ function Splash() {
 const styles = StyleSheet.create({
     main_splash: {
         flex: 1,
-        backgroundColor: "#fff",
+        // backgroundColor: "#fff",
         display: "flex",
         justifyContent: "center",
         textAlign: "center"
