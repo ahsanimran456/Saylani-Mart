@@ -38,148 +38,150 @@ function Login() {
         setloginHandler(!loginHandler)
     }
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-                <View ref={myRef} style={{ flex: 1,display:"flex",justifyContent:"center",alignItems:"center" }}>
-                    <Splash />
-                </View>
-            <ScrollView>
-                <View style={styles.main_login} ref={loginset}>
-                    {loginHandler ?
-                        <>
-                            <View style={styles.Header}>
-                                <View>
-                                    <Text style={{ textAlign: "center", fontSize: 35, fontWeight: 800, color: "#61B846" }}>
-                                        SAYLANI WELFARE
-                                    </Text>
+        <>
+            <View ref={myRef} style={{ height:height,}}>
+                <Splash />
+            </View>
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView>
+                    <View style={styles.main_login} ref={loginset}>
+                        {loginHandler ?
+                            <>
+                                <View style={styles.Header}>
+                                    <View>
+                                        <Text style={{ textAlign: "center", fontSize: 35, fontWeight: 800, color: "#61B846" }}>
+                                            SAYLANI WELFARE
+                                        </Text>
+                                    </View>
+                                    <View>
+                                        <Text style={{ textAlign: "center", fontSize: 20, fontWeight: 600, color: "#024F9D" }}>
+                                            ONLINE DISCOUNT STORE
+                                        </Text>
+                                    </View>
                                 </View>
-                                <View>
-                                    <Text style={{ textAlign: "center", fontSize: 20, fontWeight: 600, color: "#024F9D" }}>
-                                        ONLINE DISCOUNT STORE
-                                    </Text>
+                                <View style={styles.login_body}>
+                                    <View style={styles.parentinputs}>
+                                        <View style={styles.eachinput}>
+                                            <View>
+                                                <Ionicons name="person-circle-outline" size={25} color="#D4D3D3" />
+                                            </View>
+                                            <TextInput
+                                                style={styles.inputfields}
+                                                placeholder="Full Name"
+                                                placeholderTextColor="#999"
+
+                                            />
+                                        </View>
+                                        <View style={styles.eachinput}>
+                                            <View>
+                                                <Ionicons name="call-outline" size={25} color="#D4D3D3" />
+                                            </View>
+                                            <TextInput
+                                                style={styles.inputfields}
+                                                placeholder="Contact"
+                                                placeholderTextColor="#999"
+
+                                            />
+                                        </View>
+                                        <View style={styles.eachinput}>
+                                            <View>
+                                                <Ionicons name="mail" size={25} color="#D4D3D3" />
+                                            </View>
+                                            <TextInput
+                                                style={styles.inputfields}
+                                                placeholder="Email address"
+                                                placeholderTextColor="#999"
+
+                                            />
+                                        </View>
+                                        <View style={styles.eachinput}>
+                                            <View>
+                                                <Ionicons name="md-lock-closed" size={25} color="#D4D3D3" />
+                                            </View>
+                                            <TextInput
+                                                style={styles.inputfields}
+                                                placeholder="Password"
+                                                placeholderTextColor="#999"
+                                                secureTextEntry={true}
+
+                                            />
+                                        </View>
+                                        <View style={styles.eachinput}>
+                                            <View>
+                                                <Ionicons name="md-lock-closed" size={25} color="#D4D3D3" />
+                                            </View>
+                                            <TextInput
+                                                style={styles.inputfields}
+                                                placeholder="Confirm Password"
+                                                placeholderTextColor="#999"
+                                                secureTextEntry={true}
+
+                                            />
+                                        </View>
+                                        <TouchableOpacity style={styles.sub_btn}>
+                                            <Text style={{ fontWeight: 700, fontSize: 18 }}>Sign Up</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.alreadyaccount} onPress={Loginhander}>
+                                            <Text style={{ color: "#024F9D", fontWeight: 700, fontSize: 15, letterSpacing: 1 }}>Already have an account? Login</Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.login_body}>
-                                <View style={styles.parentinputs}>
-                                    <View style={styles.eachinput}>
-                                        <View>
-                                            <Ionicons name="person-circle-outline" size={25} color="#D4D3D3" />
-                                        </View>
-                                        <TextInput
-                                            style={styles.inputfields}
-                                            placeholder="Full Name"
-                                            placeholderTextColor="#999"
-
-                                        />
+                            </>
+                            :
+                            <>
+                                <View style={styles.Header}>
+                                    <View>
+                                        <Text style={{ textAlign: "center", fontSize: 35, fontWeight: 800, color: "#61B846" }}>
+                                            SAYLANI WELFARE
+                                        </Text>
                                     </View>
-                                    <View style={styles.eachinput}>
-                                        <View>
-                                            <Ionicons name="call-outline" size={25} color="#D4D3D3" />
-                                        </View>
-                                        <TextInput
-                                            style={styles.inputfields}
-                                            placeholder="Contact"
-                                            placeholderTextColor="#999"
-
-                                        />
+                                    <View>
+                                        <Text style={{ textAlign: "center", fontSize: 20, fontWeight: 600, color: "#024F9D" }}>
+                                            ONLINE DISCOUNT STORE
+                                        </Text>
                                     </View>
-                                    <View style={styles.eachinput}>
-                                        <View>
-                                            <Ionicons name="mail" size={25} color="#D4D3D3" />
-                                        </View>
-                                        <TextInput
-                                            style={styles.inputfields}
-                                            placeholder="Email address"
-                                            placeholderTextColor="#999"
-
-                                        />
-                                    </View>
-                                    <View style={styles.eachinput}>
-                                        <View>
-                                            <Ionicons name="md-lock-closed" size={25} color="#D4D3D3" />
-                                        </View>
-                                        <TextInput
-                                            style={styles.inputfields}
-                                            placeholder="Password"
-                                            placeholderTextColor="#999"
-                                            secureTextEntry={true}
-
-                                        />
-                                    </View>
-                                    <View style={styles.eachinput}>
-                                        <View>
-                                            <Ionicons name="md-lock-closed" size={25} color="#D4D3D3" />
-                                        </View>
-                                        <TextInput
-                                            style={styles.inputfields}
-                                            placeholder="Confirm Password"
-                                            placeholderTextColor="#999"
-                                            secureTextEntry={true}
-
-                                        />
-                                    </View>
-                                    <TouchableOpacity style={styles.sub_btn}>
-                                        <Text style={{ fontWeight: 700, fontSize: 18 }}>Sign Up</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.alreadyaccount} onPress={Loginhander}>
-                                        <Text style={{ color: "#024F9D", fontWeight: 700, fontSize: 15, letterSpacing: 1 }}>Already have an account? Login</Text>
-                                    </TouchableOpacity>
                                 </View>
-                            </View>
-                        </>
-                        :
-                        <>
-                            <View style={styles.Header}>
-                                <View>
-                                    <Text style={{ textAlign: "center", fontSize: 35, fontWeight: 800, color: "#61B846" }}>
-                                        SAYLANI WELFARE
-                                    </Text>
-                                </View>
-                                <View>
-                                    <Text style={{ textAlign: "center", fontSize: 20, fontWeight: 600, color: "#024F9D" }}>
-                                        ONLINE DISCOUNT STORE
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={styles.login_body}>
-                                <View style={styles.parentinputs}>
-                                    <View style={styles.eachinput}>
-                                        <View>
-                                            <Ionicons name="mail" size={25} color="#D4D3D3" />
+                                <View style={styles.login_body}>
+                                    <View style={styles.parentinputs}>
+                                        <View style={styles.eachinput}>
+                                            <View>
+                                                <Ionicons name="mail" size={25} color="#D4D3D3" />
+                                            </View>
+                                            <TextInput
+                                                style={styles.inputfields}
+                                                placeholder="Email address"
+                                                placeholderTextColor="#999"
+
+                                            />
                                         </View>
-                                        <TextInput
-                                            style={styles.inputfields}
-                                            placeholder="Email address"
-                                            placeholderTextColor="#999"
+                                        <View style={styles.eachinput}>
+                                            <View>
+                                                <Ionicons name="md-lock-closed" size={25} color="#D4D3D3" />
+                                            </View>
+                                            <TextInput
+                                                style={styles.inputfields}
+                                                placeholder="Password"
+                                                placeholderTextColor="#999"
+                                                secureTextEntry={true}
 
-                                        />
-                                    </View>
-                                    <View style={styles.eachinput}>
-                                        <View>
-                                            <Ionicons name="md-lock-closed" size={25} color="#D4D3D3" />
+                                            />
                                         </View>
-                                        <TextInput
-                                            style={styles.inputfields}
-                                            placeholder="Password"
-                                            placeholderTextColor="#999"
-                                            secureTextEntry={true}
-
-                                        />
+                                        <TouchableOpacity style={styles.sub_btn}>
+                                            <Text style={{ fontWeight: 700, fontSize: 18 }}>Login</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.alreadyaccount} onPress={Loginhander}>
+                                            <Text style={{ color: "#024F9D", fontWeight: 700, fontSize: 15, letterSpacing: 1 }}>Dont't have an account? Register</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                    <TouchableOpacity style={styles.sub_btn}>
-                                        <Text style={{ fontWeight: 700, fontSize: 18 }}>Login</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.alreadyaccount} onPress={Loginhander}>
-                                        <Text style={{ color: "#024F9D", fontWeight: 700, fontSize: 15, letterSpacing: 1 }}>Dont't have an account? Register</Text>
-                                    </TouchableOpacity>
                                 </View>
-                            </View>
-                        </>
-                    }
-                </View>
+                            </>
+                        }
+                    </View>
 
 
-            </ScrollView>
-        </SafeAreaView>
+                </ScrollView>
+            </SafeAreaView>
+        </>
 
     );
 }
