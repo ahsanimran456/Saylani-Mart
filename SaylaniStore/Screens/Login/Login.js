@@ -19,6 +19,7 @@ function Login() {
     const myRef = useRef();
     const loginset = useRef();
     const [loginHandler, setloginHandler] = useState(true);
+
     useEffect(() => {
         setTimeout(() => {
             myRef.current.setNativeProps({
@@ -39,7 +40,7 @@ function Login() {
     }
     return (
         <>
-            <View ref={myRef} style={{ height:height,}}>
+            <View ref={myRef} style={{ height: height, }}>
                 <Splash />
             </View>
             <SafeAreaView style={{ flex: 1 }}>
@@ -69,6 +70,7 @@ function Login() {
                                                 style={styles.inputfields}
                                                 placeholder="Full Name"
                                                 placeholderTextColor="#999"
+                                                maxLength={40}
 
                                             />
                                         </View>
@@ -80,7 +82,7 @@ function Login() {
                                                 style={styles.inputfields}
                                                 placeholder="Contact"
                                                 placeholderTextColor="#999"
-
+                                                maxLength={11}
                                             />
                                         </View>
                                         <View style={styles.eachinput}>
@@ -91,6 +93,7 @@ function Login() {
                                                 style={styles.inputfields}
                                                 placeholder="Email address"
                                                 placeholderTextColor="#999"
+                                                keyboardType='email-address'
 
                                             />
                                         </View>
@@ -103,6 +106,7 @@ function Login() {
                                                 placeholder="Password"
                                                 placeholderTextColor="#999"
                                                 secureTextEntry={true}
+                                                maxLength={15}
 
                                             />
                                         </View>
@@ -220,7 +224,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         alignItems: "center",
         flexDirection: "row",
-        marginVertical: 20
+        marginVertical: 20,
     },
     inputfields: {
         borderBottomWidth: 1,
@@ -228,8 +232,10 @@ const styles = StyleSheet.create({
         width: "70%",
         paddingVertical: 0,
         color: "#000",
-        textDecoration: 'none',
-        fontSize: 18
+        // textDecoration: 'none',
+        fontSize: 18,
+        paddingHorizontal:3
+
     },
     sub_btn: {
         width: "50%",
