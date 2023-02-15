@@ -9,11 +9,10 @@ import {
     TextInput, Dimensions
 
 } from 'react-native';
-
 import { useEffect, useRef } from 'react';
 import Splash from '../Splash/Splash';
 const { width, height } = Dimensions.get('window')
-
+import Ionicons from 'react-native-vector-icons/Ionicons'
 function Login() {
     const myRef = useRef();
     useEffect(() => {
@@ -47,56 +46,49 @@ function Login() {
                 </View>
 
                 <View style={styles.login_body}>
-
                     <View style={styles.parentinputs}>
-                        <View style={styles.parentinputs}>
+
+                        <View style={styles.eachinput}>
+                            <View>
+                                <Ionicons name="person-circle-outline" size={35} color="#D4D3D3" />
+                            </View>
                             <TextInput
                                 style={styles.inputfields}
                                 placeholder="Full Name"
 
                             />
                         </View>
-                        <View>
-
-                        </View>
-                    </View>
-                    <View style={styles.parentinputs}>
-                        <View style={styles.parentinputs}>
+                        <View style={styles.eachinput}>
+                            <View>
+                                <Ionicons name="call-outline" size={35} color="#D4D3D3" />
+                            </View>
                             <TextInput
                                 style={styles.inputfields}
-                                placeholder="Contact"
+                                placeholder="Full Name"
 
                             />
                         </View>
-                        <View>
-
-                        </View>
-                    </View>
-                    <View style={styles.parentinputs}>
-                        <View style={styles.parentinputs}>
+                        <View style={styles.eachinput}>
+                            <View>
+                                <Ionicons name="mail" size={35} color="#D4D3D3" />
+                            </View>
                             <TextInput
                                 style={styles.inputfields}
-                                placeholder="Email"
+                                placeholder="Full Name"
 
                             />
                         </View>
-                        <View>
-
-                        </View>
-                    </View>
-                    <View style={styles.parentinputs}>
-                        <View style={styles.parentinputs}>
+                        <View style={styles.eachinput}>
+                            <View>
+                                <Ionicons name="md-lock-closed" size={35} color="#D4D3D3" />
+                            </View>
                             <TextInput
                                 style={styles.inputfields}
-                                placeholder="Password"
-                                secureTextEntry={true}
+                                placeholder="Full Name"
+
                             />
                         </View>
-                        <View>
-
-                        </View>
                     </View>
-
                 </View>
             </View>
 
@@ -132,6 +124,15 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 10,
 
+    },
+    eachinput: {
+        width: width,
+        display: "flex",
+        justifyContent: "center",
+        textAlign: "center",
+        alignItems: "center",
+        flexDirection: "row",
+        marginVertical: 20
     },
     inputfields: {
         borderBottomWidth: 1,
