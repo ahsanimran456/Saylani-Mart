@@ -15,7 +15,15 @@ import { useEffect, useRef, useState } from 'react';
 import Splash from '../Splash/Splash';
 const { width, height } = Dimensions.get('window')
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { ToastContainer, toast } from 'react-toastify';
+
+// import function from firebase 
+
+import {
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,
+    signOut, db, auth, setDoc,
+    getFirestore,
+    doc,
+} from 'firebase/auth';
 
 let nametest = /^[A-Za-z .]{3,20}$/
 let emailtest = /^([\w]*[\w\.]*(?!\.)@gmail.com)/
@@ -58,70 +66,68 @@ function Login() {
 
     // create user 
 
-    // const Createuser = () => {
-
-    //     console.log(UserName, Contact, Email, Password, ConfirmPassword)
-    //     if ((nametest.test(UserName)) && (emailtest.test(Email)) && (passwordtest.test(Password)) && (phonetest.test(Contact))) {
-    //         // setloaders(true)
-    //         createUserWithEmailAndPassword(auth, Email, Password)
-    //             .then(async (userCredential) => {
-    //                 // Signed up  
-    //                 const user = userCredential.user;
-    //                 await setDoc(doc(db, "users", user.uid), {
-    //                     name: UserName,
-    //                     email: Email,
-    //                     password: Password,
-    //                     contact: Contact,
-    //                     userUid: user.uid
-    //                 })
-    //                 setloaders(false)
-    //                 toast.success("Sign Up Successfully !")
-    //                 console.log("signup===>", user)
-    //                 if (user.email == "admin@gmail.com") {
-    //                     navigate('/admin')
-    //                 } else {
-    //                     navigate('/user')
-    //                 }
-    //             })
-    //             .catch((error) => {
-    //                 setloaders(true)
-    //                 const errorCode = error.code;
-    //                 const errorMessage = error.message;
-    //                 toast.error(`${errorMessage}`)
-    //                 console.log("signup error===>", errorMessage)
-    //                 setloaders(false)
-    //             });
-    //     } else {
-    //         toast.error("please fill required input fileds")
-    //     }
-    // }
-
-
-    const loader = () => {
-        toast.success("hello");
-
+    const Createuser = () => {
+        console.log(UserName, Contact, Email, Password, ConfirmPassword)
+        if ((nametest.test(UserName)) && (emailtest.test(Email)) && (passwordtest.test(Password)) && (phonetest.test(Contact)) && Password === ConfirmPassword) {
+            // setloaders(true)
+            createUserWithEmailAndPassword(auth, Email, Password)
+                .then(async (userCredential) => {
+                    // Signed up  
+                    const user = userCredential.user;
+                    await setDoc(doc(db, "Users", user.uid), {
+                        name: UserName,
+                        email: Email,
+                        password: Password,
+                        contact: Contact,
+                        userUid: user.uid
+                    })
+                    // setloaders(false)
+                    // toast.success("Sign Up Successfully !")
+                    console.log("signup===>", user)
+                    if (user.email == "admin@gmail.com") {
+                        // navigate('/admin')
+                    }
+                    //  else {
+                    //     navigate('/user')
+                    // }
+                })
+                .catch((error) => {
+                    // setloaders(true)
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // toast.error(`${errorMessage}`)
+                    console.log("signup error===>", errorMessage)
+                    // setloaders(false)
+                });
+            alert("sab sahi mila ")
+        }
+        else if (!nametest.test(UserName)) {
+            alert("name token wrong")
+        }
+        else if (!phonetest.test(Contact)) {
+            alert("contact number wrong")
+        }
+        else if (!emailtest.test(Email)) {
+            alert("email wrong")
+        }
+        else if (!passwordtest.test(Password)) {
+            alert("passwrord wrong")
+        }
+        else if (Password != ConfirmPassword) {
+            alert("both password not match ")
+        }
+        else {
+            alert("lo sahi ")
+        }
     }
 
     return (
         <>
-            <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
             <View ref={myRef} style={{ height: height, }}>
                 <Splash />
             </View>
             <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView>
-
                     <View style={styles.main_login} ref={loginset}>
                         {loginHandler ?
                             <>
@@ -148,6 +154,7 @@ function Login() {
                                                 placeholder="Full Name"
                                                 placeholderTextColor="#999"
                                                 maxLength={40}
+                                                onChangeText={(e) => setUserName(e)}
 
                                             />
                                         </View>
@@ -160,6 +167,8 @@ function Login() {
                                                 placeholder="Contact"
                                                 placeholderTextColor="#999"
                                                 maxLength={11}
+                                                onChangeText={(e) => setContact(e)}
+                                                keyboardType="numeric"
                                             />
                                         </View>
                                         <View style={styles.eachinput}>
@@ -171,6 +180,7 @@ function Login() {
                                                 placeholder="Email address"
                                                 placeholderTextColor="#999"
                                                 keyboardType='email-address'
+                                                onChangeText={(e) => setEmail(e)}
 
                                             />
                                         </View>
@@ -184,7 +194,7 @@ function Login() {
                                                 placeholderTextColor="#999"
                                                 secureTextEntry={true}
                                                 maxLength={15}
-
+                                                onChangeText={(e) => setPassword(e)}
                                             />
                                         </View>
                                         <View style={styles.eachinput}>
@@ -196,10 +206,10 @@ function Login() {
                                                 placeholder="Confirm Password"
                                                 placeholderTextColor="#999"
                                                 secureTextEntry={true}
-
+                                                onChangeText={(e) => setConfirmPassword(e)}
                                             />
                                         </View>
-                                        <TouchableOpacity style={styles.sub_btn} onPress={loader} >
+                                        <TouchableOpacity style={styles.sub_btn} onPress={Createuser} >
                                             <Text style={{ fontWeight: 700, fontSize: 18 }}>Sign Up</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.alreadyaccount} onPress={Loginhander}>
