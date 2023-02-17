@@ -15,11 +15,25 @@ import { useEffect, useRef, useState } from 'react';
 import Splash from '../Splash/Splash';
 const { width, height } = Dimensions.get('window')
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { ToastContainer, toast } from 'react-toastify';
+
+let nametest = /^[A-Za-z .]{3,20}$/
+let emailtest = /^([\w]*[\w\.]*(?!\.)@gmail.com)/
+let passwordtest = /^[a-zA-Z0-9]{6,16}$/;
+let phonetest = /^[0-9]{11}$/;
+
+
 function Login() {
     const myRef = useRef();
     const loginset = useRef();
     const [loginHandler, setloginHandler] = useState(true);
+    const [UserName, setUserName] = useState();
+    const [Contact, setContact] = useState();
+    const [Email, setEmail] = useState();
+    const [Password, setPassword] = useState();
+    const [ConfirmPassword, setConfirmPassword] = useState();
 
+    // toggle screens  
     useEffect(() => {
         setTimeout(() => {
             myRef.current.setNativeProps({
@@ -35,16 +49,79 @@ function Login() {
         }, 2000)
 
     }, []);
+
+    // toggle signup to login  
+
     const Loginhander = () => {
         setloginHandler(!loginHandler)
     }
+
+    // create user 
+
+    // const Createuser = () => {
+
+    //     console.log(UserName, Contact, Email, Password, ConfirmPassword)
+    //     if ((nametest.test(UserName)) && (emailtest.test(Email)) && (passwordtest.test(Password)) && (phonetest.test(Contact))) {
+    //         // setloaders(true)
+    //         createUserWithEmailAndPassword(auth, Email, Password)
+    //             .then(async (userCredential) => {
+    //                 // Signed up  
+    //                 const user = userCredential.user;
+    //                 await setDoc(doc(db, "users", user.uid), {
+    //                     name: UserName,
+    //                     email: Email,
+    //                     password: Password,
+    //                     contact: Contact,
+    //                     userUid: user.uid
+    //                 })
+    //                 setloaders(false)
+    //                 toast.success("Sign Up Successfully !")
+    //                 console.log("signup===>", user)
+    //                 if (user.email == "admin@gmail.com") {
+    //                     navigate('/admin')
+    //                 } else {
+    //                     navigate('/user')
+    //                 }
+    //             })
+    //             .catch((error) => {
+    //                 setloaders(true)
+    //                 const errorCode = error.code;
+    //                 const errorMessage = error.message;
+    //                 toast.error(`${errorMessage}`)
+    //                 console.log("signup error===>", errorMessage)
+    //                 setloaders(false)
+    //             });
+    //     } else {
+    //         toast.error("please fill required input fileds")
+    //     }
+    // }
+
+
+    const loader = () => {
+        toast.success("hello");
+
+    }
+
     return (
         <>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <View ref={myRef} style={{ height: height, }}>
                 <Splash />
             </View>
             <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView>
+
                     <View style={styles.main_login} ref={loginset}>
                         {loginHandler ?
                             <>
@@ -122,7 +199,7 @@ function Login() {
 
                                             />
                                         </View>
-                                        <TouchableOpacity style={styles.sub_btn}>
+                                        <TouchableOpacity style={styles.sub_btn} onPress={loader} >
                                             <Text style={{ fontWeight: 700, fontSize: 18 }}>Sign Up</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.alreadyaccount} onPress={Loginhander}>
@@ -234,7 +311,7 @@ const styles = StyleSheet.create({
         color: "#000",
         // textDecoration: 'none',
         fontSize: 18,
-        paddingHorizontal:3
+        paddingHorizontal: 3
 
     },
     sub_btn: {
