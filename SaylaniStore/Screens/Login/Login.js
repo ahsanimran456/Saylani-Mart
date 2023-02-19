@@ -9,26 +9,24 @@ import {
     TextInput,
     Dimensions,
     TouchableOpacity
-
 } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import Splash from '../Splash/Splash';
 const { width, height } = Dimensions.get('window')
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native';
 
-// import function from firebase 
+let nametest = /^[A-Za-z .]{3,20}$/
+let emailtest = /^([\w]*[\w\.]*(?!\.)@gmail.com)/
+let passwordtest = /^[a-zA-Z0-9]{6,16}$/;
+let phonetest = /^[0-9]{11}$/;
 
 import {
     getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,
     signOut, db, auth, setDoc,
     getFirestore,
     doc,
-} from 'firebase/auth';
-
-let nametest = /^[A-Za-z .]{3,20}$/
-let emailtest = /^([\w]*[\w\.]*(?!\.)@gmail.com)/
-let passwordtest = /^[a-zA-Z0-9]{6,16}$/;
-let phonetest = /^[0-9]{11}$/;
+} from '../../FirebaseConfig/Firebase.js'
 
 
 function Login() {
@@ -40,6 +38,7 @@ function Login() {
     const [Email, setEmail] = useState();
     const [Password, setPassword] = useState();
     const [ConfirmPassword, setConfirmPassword] = useState();
+    const navigation = useNavigation()
 
     // toggle screens  
     useEffect(() => {
@@ -64,29 +63,58 @@ function Login() {
         setloginHandler(!loginHandler)
     }
 
+    // check user 
+    useEffect(() => {
+        const auth = getAuth()
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("user", user);
+                console.log("email", user.email);
+                if (user.email == "admin@gmail.com") {
+                    navigation.navigate("adminHome")
+                } else {
+                    navigation.navigate("userhome")
+                }
+            } else {
+                console.log("nhi mila")
+            }
+        });
+    }, [])
+
     // create user 
 
     const Createuser = () => {
         console.log(UserName, Contact, Email, Password, ConfirmPassword)
-        if ((nametest.test(UserName)) && (emailtest.test(Email)) && (passwordtest.test(Password)) && (phonetest.test(Contact)) && Password === ConfirmPassword) {
+        if ((nametest.test(UserName)) && (emailtest.test(Email)) && (passwordtest.test(Password)) && (phonetest.test(Contact)) && (Password === ConfirmPassword)) {
             // setloaders(true)
             createUserWithEmailAndPassword(auth, Email, Password)
                 .then(async (userCredential) => {
                     // Signed up  
                     const user = userCredential.user;
-                    await setDoc(doc(db, "Users", user.uid), {
-                        name: UserName,
-                        email: Email,
+                    console.log("signup===>", user)
+
+                    await setDoc(doc(db, "users", user.uid), {
+                        fullname: UserName,
+                        emailaddress: Email,
                         password: Password,
-                        contact: Contact,
+                        contactnumber: Contact,
                         userUid: user.uid
                     })
+                    setUserName("")
+                    setContact("")
+                    setEmail("")
+                    setPassword("")
+                    setConfirmPassword("")
+                    if (user.email == "admin@gmail.com") {
+                        navigation.navigate("adminHome")
+                    } else {
+                        navigation.navigate("userhome")
+                    }
                     // setloaders(false)
                     // toast.success("Sign Up Successfully !")
-                    console.log("signup===>", user)
-                    if (user.email == "admin@gmail.com") {
-                        // navigate('/admin')
-                    }
+                    // if (user.email == "admin@gmail.com") {
+                    //     // navigate('/admin')
+                    // }
                     //  else {
                     //     navigate('/user')
                     // }
@@ -119,6 +147,41 @@ function Login() {
         else {
             alert("lo sahi ")
         }
+    }
+
+    // login user 
+    const Loginuser = () => {
+        console.log(Email, Password)
+        // alert("hello")
+        if ((emailtest.test(Email)) && (passwordtest.test(Password))) {
+            // setloaders(true)
+            signInWithEmailAndPassword(auth, Email, Password)
+                .then((userCredential) => {
+                    // toast.success("Sign In Successfully !")
+                    const user = userCredential.user;
+                    console.log("login user .....", user)
+
+                    if (user.email == "admin@gmail.com") {
+                        navigation.navigate("adminHome")
+                    } else {
+                        navigation.navigate("userhome")
+                    }
+                    // setloaders(false)
+
+                })
+                .catch((error) => {
+                    // setloaders(true)
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log("login error", errorMessage)
+                    // toast.error(`${errorMessage}`)
+                    // setloaders(false)
+                });
+        }
+        else {
+            // toast.error("Please fill required input fileds")
+        }
+
     }
 
     return (
@@ -242,7 +305,7 @@ function Login() {
                                                 style={styles.inputfields}
                                                 placeholder="Email address"
                                                 placeholderTextColor="#999"
-
+                                                onChangeText={(e) => setEmail(e)}
                                             />
                                         </View>
                                         <View style={styles.eachinput}>
@@ -254,10 +317,10 @@ function Login() {
                                                 placeholder="Password"
                                                 placeholderTextColor="#999"
                                                 secureTextEntry={true}
-
+                                                onChangeText={(e) => setPassword(e)}
                                             />
                                         </View>
-                                        <TouchableOpacity style={styles.sub_btn}>
+                                        <TouchableOpacity style={styles.sub_btn} onPress={Loginuser}>
                                             <Text style={{ fontWeight: 700, fontSize: 18 }}>Login</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.alreadyaccount} onPress={Loginhander}>
