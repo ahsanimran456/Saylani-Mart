@@ -16,7 +16,8 @@ function Router() {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-                    <Stack.Screen name="UserHome" component={UserBottomNav} options={{ headerShown: false }} />
+                    {/* <Stack.Screen name="UserHome" component={UserBottomNav} options={{ headerShown: false }} /> */}
+                    <Stack.Screen name="UserHome" component={UserDrawer} options={{ headerShown: false }} />
                     
                     {/* <Stack.Screen name="Drawernavigation" component={Drawernavigation} options={{ headerShown: false }} />
                     <Stack.Screen name="adminHome" component={Admin} options={{ headerShown: false }} /> */}

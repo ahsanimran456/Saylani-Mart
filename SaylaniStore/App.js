@@ -18,7 +18,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Router from './Router/Router';
-
+import 'react-native-gesture-handler';
 
 
 
