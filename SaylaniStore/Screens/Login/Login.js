@@ -71,9 +71,10 @@ function Login() {
                 console.log("user", user);
                 console.log("email", user.email);
                 if (user.email == "admin@gmail.com") {
-                    navigation.navigate("adminHome")
+                    // navigation.navigate("adminHome")
+                    alert("admin")
                 } else {
-                    navigation.navigate("userhome")
+                    navigation.navigate("UserHome")
                 }
             } else {
                 console.log("nhi mila")

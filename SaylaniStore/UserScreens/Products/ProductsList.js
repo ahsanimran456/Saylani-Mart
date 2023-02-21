@@ -10,15 +10,14 @@ import {
     Dimensions,
     TouchableOpacity
 } from 'react-native';
-
-function Home() {
+function Products() {
     return (
         <View>
             <Text>
-                Helo user home
+                Procutds
             </Text>
         </View>
     );
 }
 
-export default Home;
+export default Products;
