@@ -20,7 +20,8 @@ let nametest = /^[A-Za-z .]{3,20}$/
 let emailtest = /^([\w]*[\w\.]*(?!\.)@gmail.com)/
 let passwordtest = /^[a-zA-Z0-9]{6,16}$/;
 let phonetest = /^[0-9]{11}$/;
-
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 // import {
 //     getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,
 //     signOut, db, auth, setDoc,
@@ -153,106 +154,96 @@ function Login() {
 
     // with app firebase 
 
-    // const Createuser = () => {
-    //     console.log(UserName, Contact, Email, Password, ConfirmPassword)
-    //     if ((nametest.test(UserName)) && (emailtest.test(Email)) && (passwordtest.test(Password)) && (phonetest.test(Contact)) && (Password === ConfirmPassword)) {
-    //         // setloaders(true)
-    //         createUserWithEmailAndPassword(auth, Email, Password)
-    //             .then(async (userCredential) => {
-    //                 // Signed up  
-    //                 const user = userCredential.user;
-    //                 console.log("signup===>", user)
+    const Createuser = () => {
+        console.log(UserName, Contact, Email, Password, ConfirmPassword)
+        if ((nametest.test(UserName)) && (emailtest.test(Email)) && (passwordtest.test(Password)) && (phonetest.test(Contact)) && (Password === ConfirmPassword)) {
+            auth()
+                .createUserWithEmailAndPassword(Email, Password)
+                .then((user) => {
+                    // const user = userCredential.user;
+                    console.log("signup===>", user)
+                    console.log('User account created & signed in!');
+                    firestore()
+                        .collection('Users')
+                        .add({
+                            fullname: UserName,
+                            emailaddress: Email,
+                            password: Password,
+                            contactnumber: Contact,
+                            // userUid: user.uid
+                        })
+                        .then(() => {
+                            console.log('User added!');
+                        });
+                })
+                .catch(error => {
+                    if (error.code === 'auth/email-already-in-use') {
+                        console.log('That email address is already in use!');
+                    }
 
-    //                 await setDoc(doc(db, "users", user.uid), {
-    //                     fullname: UserName,
-    //                     emailaddress: Email,
-    //                     password: Password,
-    //                     contactnumber: Contact,
-    //                     userUid: user.uid
-    //                 })
-    //                 setUserName("")
-    //                 setContact("")
-    //                 setEmail("")
-    //                 setPassword("")
-    //                 setConfirmPassword("")
-    //                 if (user.email == "admin@gmail.com") {
-    //                     navigation.navigate("adminHome")
-    //                 } else {
-    //                     navigation.navigate("userhome")
-    //                 }
-    //                 // setloaders(false)
-    //                 // toast.success("Sign Up Successfully !")
-    //                 // if (user.email == "admin@gmail.com") {
-    //                 //     // navigate('/admin')
-    //                 // }
-    //                 //  else {
-    //                 //     navigate('/user')
-    //                 // }
-    //             })
-    //             .catch((error) => {
-    //                 // setloaders(true)
-    //                 const errorCode = error.code;
-    //                 const errorMessage = error.message;
-    //                 // toast.error(`${errorMessage}`)
-    //                 console.log("signup error===>", errorMessage)
-    //                 // setloaders(false)
-    //             });
-    //         alert("sab sahi mila ")
-    //     }
-    //     else if (!nametest.test(UserName)) {
-    //         alert("name token wrong")
-    //     }
-    //     else if (!phonetest.test(Contact)) {
-    //         alert("contact number wrong")
-    //     }
-    //     else if (!emailtest.test(Email)) {
-    //         alert("email wrong")
-    //     }
-    //     else if (!passwordtest.test(Password)) {
-    //         alert("passwrord wrong")
-    //     }
-    //     else if (Password != ConfirmPassword) {
-    //         alert("both password not match ")
-    //     }
-    //     else {
-    //         alert("lo sahi ")
-    //     }
-    // }
+                    if (error.code === 'auth/invalid-email') {
+                        console.log('That email address is invalid!');
+                    }
+
+                    console.error(error);
+                });
+
+            alert("sab sahi mila ")
+        }
+        else if (!nametest.test(UserName)) {
+            alert("name token wrong")
+        }
+        else if (!phonetest.test(Contact)) {
+            alert("contact number wrong")
+        }
+        else if (!emailtest.test(Email)) {
+            alert("email wrong")
+        }
+        else if (!passwordtest.test(Password)) {
+            alert("passwrord wrong")
+        }
+        else if (Password != ConfirmPassword) {
+            alert("both password not match ")
+        }
+        else {
+            alert("lo sahi ")
+        }
+    }
 
     // login user 
-    // const Loginuser = () => {
-    //     console.log(Email, Password)
-    //     // alert("hello")
-    //     if ((emailtest.test(Email)) && (passwordtest.test(Password))) {
-    //         // setloaders(true)
-    //         signInWithEmailAndPassword(auth, Email, Password)
-    //             .then((userCredential) => {
-    //                 // toast.success("Sign In Successfully !")
-    //                 const user = userCredential.user;
-    //                 console.log("login user .....", user)
+    const Loginuser = () => {
+        console.log(Email, Password)
+        // alert("hello")
+        if ((emailtest.test(Email)) && (passwordtest.test(Password))) {
+            // setloaders(true)
+            signInWithEmailAndPassword(auth, Email, Password)
+                .then((userCredential) => {
+                    // toast.success("Sign In Successfully !")
+                    const user = userCredential.user;
+                    console.log("login user .....", user)
 
-    //                 if (user.email == "admin@gmail.com") {
-    //                     navigation.navigate("adminHome")
-    //                 } else {
-    //                     navigation.navigate("userhome")
-    //                 }
-    //                 // setloaders(false)
+                    if (user.email == "admin@gmail.com") {
+                        navigation.navigate("adminHome")
+                    } else {
+                        navigation.navigate("userhome")
+                    }
+                    // setloaders(false)
 
-    //             })
-    //             .catch((error) => {
-    //                 // setloaders(true)
-    //                 const errorCode = error.code;
-    //                 const errorMessage = error.message;
-    //                 console.log("login error", errorMessage)
-    //                 // toast.error(`${errorMessage}`)
-    //                 // setloaders(false)
-    //             });
-    //     }
-    //     else {
-    //         // toast.error("Please fill required input fileds")
-    //     }
+                })
+                .catch((error) => {
+                    // setloaders(true)
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log("login error", errorMessage)
+                    // toast.error(`${errorMessage}`)
+                    // setloaders(false)
+                });
+        }
+        else {
+            // toast.error("Please fill required input fileds")
+        }
 
-    // }
+    }
 
     return (
         <>
@@ -342,7 +333,7 @@ function Login() {
                                                 onChangeText={(e) => setConfirmPassword(e)}
                                             />
                                         </View>
-                                        <TouchableOpacity style={styles.sub_btn}  >
+                                        <TouchableOpacity style={styles.sub_btn} onPress={Createuser} >
                                             <Text style={{ fontWeight: 700, fontSize: 18 }}>Sign Up</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.alreadyaccount} onPress={Loginhander}>
