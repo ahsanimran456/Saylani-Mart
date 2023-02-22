@@ -160,20 +160,31 @@ function Login() {
             auth()
                 .createUserWithEmailAndPassword(Email, Password)
                 .then((user) => {
-                    // const user = userCredential.user;
                     console.log("signup===>", user)
                     console.log('User account created & signed in!');
                     firestore()
                         .collection('Users')
-                        .add({
+                        .doc(user.user.uid)
+                        .set({
                             fullname: UserName,
                             emailaddress: Email,
                             password: Password,
                             contactnumber: Contact,
-                            // userUid: user.uid
+                            userUid: user.user.uid
                         })
                         .then(() => {
-                            console.log('User added!');
+                            console.log('User added!')
+                            if (user.user.email == "admin@gmail.com") {
+                                navigation.navigate("adminHome")
+                            } else {
+                                navigation.navigate("userhome")
+                            }
+                            setUserName("")
+                            setContact("")
+                            setEmail("")
+                            setPassword("")
+                            setConfirmPassword("")
+                            alert(" user & data add successfuly")
                         });
                 })
                 .catch(error => {
@@ -211,38 +222,55 @@ function Login() {
     }
 
     // login user 
+    // const Loginuser = () => {
+    //     console.log(Email, Password)
+    //     // alert("hello")
+    //     if ((emailtest.test(Email)) && (passwordtest.test(Password))) {
+    //         // setloaders(true)
+    //         signInWithEmailAndPassword(auth, Email, Password)
+    //             .then((userCredential) => {
+    //                 // toast.success("Sign In Successfully !")
+    //                 const user = userCredential.user;
+    //                 console.log("login user .....", user)
+
+    //                 if (user.email == "admin@gmail.com") {
+    //                     navigation.navigate("adminHome")
+    //                 } else {
+    //                     navigation.navigate("userhome")
+    //                 }
+    //                 // setloaders(false)
+
+    //             })
+    //             .catch((error) => {
+    //                 // setloaders(true)
+    //                 const errorCode = error.code;
+    //                 const errorMessage = error.message;
+    //                 console.log("login error", errorMessage)
+    //                 // toast.error(`${errorMessage}`)
+    //                 // setloaders(false)
+    //             });
+    //     }
+    //     else {
+    //         // toast.error("Please fill required input fileds")
+    //     }
+
+    // }
+
+    // login user with firebase app 
+
     const Loginuser = () => {
         console.log(Email, Password)
-        // alert("hello")
         if ((emailtest.test(Email)) && (passwordtest.test(Password))) {
-            // setloaders(true)
-            signInWithEmailAndPassword(auth, Email, Password)
-                .then((userCredential) => {
-                    // toast.success("Sign In Successfully !")
-                    const user = userCredential.user;
-                    console.log("login user .....", user)
-
-                    if (user.email == "admin@gmail.com") {
-                        navigation.navigate("adminHome")
-                    } else {
-                        navigation.navigate("userhome")
-                    }
-                    // setloaders(false)
-
+            auth()
+                .signInWithEmailAndPassword(Email, Password)
+                .then((user) => {
+                    console.log('User milgya ', user);
+                    alert('User milgya ');
                 })
-                .catch((error) => {
-                    // setloaders(true)
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log("login error", errorMessage)
-                    // toast.error(`${errorMessage}`)
-                    // setloaders(false)
+                .catch(error => {
+                    console.error(error);
                 });
         }
-        else {
-            // toast.error("Please fill required input fileds")
-        }
-
     }
 
     return (
@@ -279,6 +307,7 @@ function Login() {
                                                 placeholderTextColor="#999"
                                                 maxLength={40}
                                                 onChangeText={(e) => setUserName(e)}
+                                                value={UserName}
 
                                             />
                                         </View>
@@ -293,6 +322,8 @@ function Login() {
                                                 maxLength={11}
                                                 onChangeText={(e) => setContact(e)}
                                                 keyboardType="numeric"
+                                                value={Contact}
+
                                             />
                                         </View>
                                         <View style={styles.eachinput}>
@@ -305,6 +336,7 @@ function Login() {
                                                 placeholderTextColor="#999"
                                                 keyboardType='email-address'
                                                 onChangeText={(e) => setEmail(e)}
+                                                value={Email}
 
                                             />
                                         </View>
@@ -319,6 +351,8 @@ function Login() {
                                                 secureTextEntry={true}
                                                 maxLength={15}
                                                 onChangeText={(e) => setPassword(e)}
+                                                value={Password}
+
                                             />
                                         </View>
                                         <View style={styles.eachinput}>
@@ -331,6 +365,8 @@ function Login() {
                                                 placeholderTextColor="#999"
                                                 secureTextEntry={true}
                                                 onChangeText={(e) => setConfirmPassword(e)}
+                                                value={ConfirmPassword}
+
                                             />
                                         </View>
                                         <TouchableOpacity style={styles.sub_btn} onPress={Createuser} >
@@ -367,6 +403,8 @@ function Login() {
                                                 placeholder="Email address"
                                                 placeholderTextColor="#999"
                                                 onChangeText={(e) => setEmail(e)}
+                                                value={Email}
+
                                             />
                                         </View>
                                         <View style={styles.eachinput}>
@@ -379,6 +417,8 @@ function Login() {
                                                 placeholderTextColor="#999"
                                                 secureTextEntry={true}
                                                 onChangeText={(e) => setPassword(e)}
+                                                value={Password}
+
                                             />
                                         </View>
                                         <TouchableOpacity style={styles.sub_btn} onPress={Loginuser}>
