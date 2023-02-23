@@ -41,7 +41,9 @@ function Home() {
 const styles = StyleSheet.create({
     headerparent: {
         paddingHorizontal: 10,
-        paddingVertical: 10
+        paddingVertical: 10,
+        borderWidth:2,
+        borderBottomColor:"#D9D9D9"
 
     },
     headerinner: {
