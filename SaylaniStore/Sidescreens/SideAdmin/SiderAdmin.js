@@ -4,7 +4,8 @@ const Drawer = createDrawerNavigator();
 function AdminDrawer() {
     return (
         <Drawer.Navigator>
-            <Drawer.Screen name="Adminbottom" component={AdminBottomNav} />
+            <Drawer.Screen name="Saylani Store" component={AdminBottomNav} options={{
+                    headerShown: false,}} />
         </Drawer.Navigator>
     );
 }

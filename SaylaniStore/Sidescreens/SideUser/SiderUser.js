@@ -4,7 +4,7 @@ const Drawer = createDrawerNavigator();
 function UserDrawer() {
     return (
         <Drawer.Navigator>
-            <Drawer.Screen name="Userbottom" component={UserBottomNav} />
+            <Drawer.Screen name="Saylani Store" component={UserBottomNav}  />
         </Drawer.Navigator>
     );
 }

@@ -64,6 +64,24 @@ function Login() {
         setloginHandler(!loginHandler)
     }
 
+   
+    useEffect(() => {
+        auth().onAuthStateChanged((user) => {
+            if (user) {
+                console.log("user", user);
+                console.log("email", user.email);
+                if (user.email == "admin@gmail.com") {
+                    navigation.navigate("AdminHome")
+                } else {
+                    navigation.navigate("UserHome")
+                }
+            } else {
+                console.log("nhi mila")
+            }
+        })
+    }, []);
+
+
     // check user 
     // useEffect(() => {
     //     const auth = getAuth()
@@ -268,7 +286,7 @@ function Login() {
                         navigation.navigate("AdminHome")
                     } else {
                         navigation.navigate("UserHome")
-                    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                    }
                     console.log('User milgya ', user);
                     alert('User milgya ');
                 })
