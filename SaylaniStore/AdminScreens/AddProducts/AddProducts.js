@@ -13,14 +13,21 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import DropDownPicker from 'react-native-dropdown-picker';
+import { Dropdown } from 'react-native-element-dropdown';
 function AddProducts() {
-    const [selectedValue, setSelectedValue] = useState(null);
-    const options = [
-        { label: 'Option 1', value: 'option1' },
-        { label: 'Option 2', value: 'option2' },
-        { label: 'Option 3', value: 'option3' }
+    const data = [
+        { label: 'Item 1', value: '1' },
+        { label: 'Item 2', value: '2' },
+        { label: 'Item 3', value: '3' },
+        { label: 'Item 4', value: '4' },
+        { label: 'Item 5', value: '5' },
+        { label: 'Item 6', value: '6' },
+        { label: 'Item 7', value: '7' },
+        { label: 'Item 8', value: '8' },
     ];
+    const [value, setValue] = useState(null);
+    const [isFocus, setIsFocus] = useState(false);
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
@@ -54,12 +61,34 @@ function AddProducts() {
                         <TextInput placeholder='Item Name' placeholderTextColor={"#BDBABA"} pla />
                     </View>
                     <View style={styles.inputs}>
-                        <DropDownPicker
+                        {/* <DropDownPicker
                             items={options}
                             defaultValue={selectedValue}
-                            placeholder="Select an option"
-                            containerStyle={{ height: 40 }}
-                            onChangeItem={item => setSelectedValue(item.value)}
+                            containerStyle={{ height: 50, width: 200, marginTop: 20 }}
+                            style={{ backgroundColor: '#fafafa' }}
+                            dropDownStyle={{ backgroundColor: '#fafafa' }}
+                            onChangeItem={(item) => setSelectedValue(item.value)}
+                        /> */}
+                        <Dropdown
+                            placeholderStyle={styles.dropdownplaceholder}
+                            selectedTextStyle={styles.selectedTextStyle}
+                            iconStyle={styles.iconStyle}
+                            data={data}
+                            maxHeight={150}
+                            labelField="label"
+                            valueField="value"
+                            placeholder={!isFocus ? 'Select item' : '...'}
+                            searchPlaceholder="Search..."
+                            value={value}
+                            style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                            onFocus={() => setIsFocus(true)}
+                            onBlur={() => setIsFocus(false)}
+                            itemContainerStyle={styles.dropinner}
+                            itemTextStyle={styles.dropinnertext}
+                            onChange={item => {
+                                setValue(item.value);
+                                setIsFocus(false);
+                            }}
                         />
                     </View>
                 </View>
@@ -111,7 +140,27 @@ const styles = StyleSheet.create({
         color: "#BDBABA",
         borderRadius: 5,
         marginVertical: 5,
+        // height: 200
 
+    },
+    dropdownplaceholder: {
+        color: "#BDBABA"
+    },
+    iconStyle: {
+        width: 30,
+        height: 40,
+    },
+    dropdown: {
+
+    },
+    dropinner: {
+        backgroundColor: "#BDBABA"
+    },
+    selectedTextStyle: {
+        color: "black"
+    },
+    dropinnertext: {
+        color: "black"
     }
 
 })
