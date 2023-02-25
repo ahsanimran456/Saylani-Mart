@@ -102,6 +102,11 @@ function AddProducts() {
                         </Text>
                         <TextInput style={{ padding: 0, fontSize: 18, color: "#000" }} placeholder="$3.22" placeholderTextColor={"#BDBABA"} />
                     </View>
+                    <View style={styles.btn}>
+                        <TouchableOpacity style={styles.addproduct_btn} >
+                            <Text style={{ fontWeight: 700, fontSize: 18 }}>Add Product</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -175,7 +180,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingVertical: 10,
         paddingHorizontal: 5,
-        marginTop:7
+        marginTop: 7
+    },
+    btn:{
+        marginTop:10,
+        alignItems: "center"
+    },
+    addproduct_btn:{
+        backgroundColor:"#61B846",
+        paddingHorizontal:20,
+        paddingVertical:15,
+        borderRadius:7
+        
     }
 
 })
