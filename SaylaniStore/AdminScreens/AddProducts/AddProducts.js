@@ -11,9 +11,16 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native';
+import { useState } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign'
-
+import DropDownPicker from 'react-native-dropdown-picker';
 function AddProducts() {
+    const [selectedValue, setSelectedValue] = useState(null);
+    const options = [
+        { label: 'Option 1', value: 'option1' },
+        { label: 'Option 2', value: 'option2' },
+        { label: 'Option 3', value: 'option3' }
+    ];
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
@@ -41,7 +48,19 @@ function AddProducts() {
                         </Text>
                     </View>
                     <View style={styles.addimg}>
-                        <AntDesign name="camerao" size={30} style={{ color: "#BFBCBC" }} />
+                        <AntDesign name="camerao" size={80} style={{ color: "#828282" }} />
+                    </View>
+                    <View style={styles.inputs}>
+                        <TextInput placeholder='Item Name' placeholderTextColor={"#BDBABA"} pla />
+                    </View>
+                    <View style={styles.inputs}>
+                        <DropDownPicker
+                            items={options}
+                            defaultValue={selectedValue}
+                            placeholder="Select an option"
+                            containerStyle={{ height: 40 }}
+                            onChangeItem={item => setSelectedValue(item.value)}
+                        />
                     </View>
                 </View>
             </ScrollView>
@@ -73,7 +92,28 @@ const styles = StyleSheet.create({
     allproducts: {
         paddingHorizontal: 15,
         paddingVertical: 15
+    },
+    addimg: {
+        maxWidth: "100%",
+        borderRadius: 7,
+        backgroundColor: "#D9D9D9",
+        height: 120,
+        textAlign: "center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginVertical: 15,
+
+    },
+    inputs: {
+        backgroundColor: "#D9D9D9",
+        paddingHorizontal: 10,
+        color: "#BDBABA",
+        borderRadius: 5,
+        marginVertical: 5,
+
     }
+
 })
 
 export default AddProducts;
