@@ -45,26 +45,10 @@ function Home() {
                         </View>
                         <View>
                             <Text style={styles.headertext2}>
-                                    Apple
+                                Apple
                             </Text>
                             <Text style={styles.headertext2}>
-                                    1 kg
-                            </Text>
-                        </View>
-                        <View>
-
-                        </View>
-                    </View>
-                    <View style={styles.Eachproducts}>
-                        <View style={{ width: 100, height: 50 }}>
-                            <Image source={require("../../Assets/images/apple.png")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-                        </View>
-                        <View>
-                            <Text style={styles.headertext2}>
-                                    Apple
-                            </Text>
-                            <Text style={styles.headertext2}>
-                                    1 kg
+                                1 kg
                             </Text>
                         </View>
                         <View>
@@ -77,26 +61,10 @@ function Home() {
                         </View>
                         <View>
                             <Text style={styles.headertext2}>
-                                    Apple
+                                Apple
                             </Text>
                             <Text style={styles.headertext2}>
-                                    1 kg
-                            </Text>
-                        </View>
-                        <View>
-
-                        </View>
-                    </View>
-                    <View style={styles.Eachproducts}>
-                        <View style={{ width: 100, height: 50 }}>
-                            <Image source={require("../../Assets/images/apple.png")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-                        </View>
-                        <View>
-                            <Text style={styles.headertext2}>
-                                    Apple
-                            </Text>
-                            <Text style={styles.headertext2}>
-                                    1 kg
+                                1 kg
                             </Text>
                         </View>
                         <View>
@@ -109,10 +77,10 @@ function Home() {
                         </View>
                         <View>
                             <Text style={styles.headertext2}>
-                                    Apple
+                                Apple
                             </Text>
                             <Text style={styles.headertext2}>
-                                    1 kg
+                                1 kg
                             </Text>
                         </View>
                         <View>
@@ -125,10 +93,42 @@ function Home() {
                         </View>
                         <View>
                             <Text style={styles.headertext2}>
-                                    Apple
+                                Apple
                             </Text>
                             <Text style={styles.headertext2}>
-                                    1 kg
+                                1 kg
+                            </Text>
+                        </View>
+                        <View>
+
+                        </View>
+                    </View>
+                    <View style={styles.Eachproducts}>
+                        <View style={{ width: 100, height: 50 }}>
+                            <Image source={require("../../Assets/images/apple.png")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                        </View>
+                        <View>
+                            <Text style={styles.headertext2}>
+                                Apple
+                            </Text>
+                            <Text style={styles.headertext2}>
+                                1 kg
+                            </Text>
+                        </View>
+                        <View>
+
+                        </View>
+                    </View>
+                    <View style={styles.Eachproducts}>
+                        <View style={{ width: 100, height: 50 }}>
+                            <Image source={require("../../Assets/images/apple.png")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                        </View>
+                        <View>
+                            <Text style={styles.headertext2}>
+                                Apple
+                            </Text>
+                            <Text style={styles.headertext2}>
+                                1 kg
                             </Text>
                         </View>
                         <View>
@@ -169,11 +169,11 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         marginVertical: 20,
-        alignItems:"center",
-        borderRadius:7,
-        borderWidth:1,
-        borderColor:"#65BD50",
-        paddingVertical:20
+        alignItems: "center",
+        borderRadius: 7,
+        borderWidth: 1,
+        borderColor: "#65BD50",
+        paddingVertical: 20
     }
 
 
