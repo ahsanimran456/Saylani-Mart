@@ -9,7 +9,7 @@ import {
     TextInput,
     Dimensions,
     TouchableOpacity,
-    Image
+    Image,
 } from 'react-native';
 import { useState } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -58,7 +58,7 @@ function AddProducts() {
                         <AntDesign name="camerao" size={80} style={{ color: "#828282" }} />
                     </View>
                     <View style={styles.inputs}>
-                        <TextInput placeholder='Item Name' placeholderTextColor={"#BDBABA"} style={{padding:0,color:"#000",fontSize:16,textDecorationLine:"none"}} />
+                        <TextInput placeholder='Item Name' placeholderTextColor={"#BDBABA"} style={{ padding: 0, color: "#000", fontSize: 16, textDecorationLine: "none" }} />
                     </View>
                     <View style={styles.inputs}>
                         <Dropdown
@@ -81,6 +81,26 @@ function AddProducts() {
                                 setIsFocus(false);
                             }}
                         />
+                    </View>
+                    <View style={styles.inputs}>
+                        <TextInput
+                            multiline={true}
+                            numberOfLines={5}
+                            style={{ padding: 0 }}
+                            placeholder='Describe this Item' placeholderTextColor={"#BDBABA"}
+                        />
+                    </View>
+                    <View style={styles.unitinputs}>
+                        <Text style={styles.headertext1}>
+                            Unit Name:
+                        </Text>
+                        <TextInput style={{ padding: 0, fontSize: 18, color: "#000" }} placeholder=" Pcs. / Kg / dozen" placeholderTextColor={"#BDBABA"} />
+                    </View>
+                    <View style={styles.unitinputs}>
+                        <Text style={styles.headertext1}>
+                            Unit Price:
+                        </Text>
+                        <TextInput style={{ padding: 0, fontSize: 18, color: "#000" }} placeholder="$3.22" placeholderTextColor={"#BDBABA"} />
                     </View>
                 </View>
             </ScrollView>
@@ -131,7 +151,7 @@ const styles = StyleSheet.create({
         color: "#BDBABA",
         borderRadius: 5,
         marginVertical: 5,
-        paddingVertical:6
+        paddingVertical: 6
     },
     dropdownplaceholder: {
         color: "#BDBABA"
@@ -148,6 +168,14 @@ const styles = StyleSheet.create({
     },
     dropinnertext: {
         color: "black"
+    },
+    unitinputs: {
+        flexDirection: "row",
+        backgroundColor: "#D9D9D9",
+        alignItems: "center",
+        paddingVertical: 10,
+        paddingHorizontal: 5,
+        marginTop:7
     }
 
 })
