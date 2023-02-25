@@ -58,17 +58,9 @@ function AddProducts() {
                         <AntDesign name="camerao" size={80} style={{ color: "#828282" }} />
                     </View>
                     <View style={styles.inputs}>
-                        <TextInput placeholder='Item Name' placeholderTextColor={"#BDBABA"} pla />
+                        <TextInput placeholder='Item Name' placeholderTextColor={"#BDBABA"} style={{padding:0,color:"#000",fontSize:16,textDecorationLine:"none"}} />
                     </View>
                     <View style={styles.inputs}>
-                        {/* <DropDownPicker
-                            items={options}
-                            defaultValue={selectedValue}
-                            containerStyle={{ height: 50, width: 200, marginTop: 20 }}
-                            style={{ backgroundColor: '#fafafa' }}
-                            dropDownStyle={{ backgroundColor: '#fafafa' }}
-                            onChangeItem={(item) => setSelectedValue(item.value)}
-                        /> */}
                         <Dropdown
                             placeholderStyle={styles.dropdownplaceholder}
                             selectedTextStyle={styles.selectedTextStyle}
@@ -80,7 +72,6 @@ function AddProducts() {
                             placeholder={!isFocus ? 'Select item' : '...'}
                             searchPlaceholder="Search..."
                             value={value}
-                            style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
                             onFocus={() => setIsFocus(true)}
                             onBlur={() => setIsFocus(false)}
                             itemContainerStyle={styles.dropinner}
@@ -140,8 +131,7 @@ const styles = StyleSheet.create({
         color: "#BDBABA",
         borderRadius: 5,
         marginVertical: 5,
-        // height: 200
-
+        paddingVertical:6
     },
     dropdownplaceholder: {
         color: "#BDBABA"
@@ -149,9 +139,6 @@ const styles = StyleSheet.create({
     iconStyle: {
         width: 30,
         height: 40,
-    },
-    dropdown: {
-
     },
     dropinner: {
         backgroundColor: "#BDBABA"
