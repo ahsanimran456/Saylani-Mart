@@ -86,7 +86,7 @@ function AddProducts() {
                         <TextInput
                             multiline={true}
                             numberOfLines={5}
-                            style={{ padding: 0 ,color:"#000",fontSize:17}}
+                            style={{ padding: 0 ,color:"#000",fontSize}}
                             placeholder='Describe this Item' placeholderTextColor={"#BDBABA"}
                         />
                     </View>
@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
     iconStyle: {
         width: 30,
         height: 40,
+        fontSize:10
     },
     dropinner: {
         backgroundColor: "#BDBABA"
