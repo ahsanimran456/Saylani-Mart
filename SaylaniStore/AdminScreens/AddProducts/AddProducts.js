@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     Image,
 } from 'react-native';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { Dropdown } from 'react-native-element-dropdown';
 function AddProducts() {
@@ -27,6 +27,17 @@ function AddProducts() {
     ];
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
+    const [Productdata, setProductdata] = useState({
+        ProductName: " ",
+        Droplist: " ",
+        ProductDescription: "",
+        UnitName: "",
+        UnitPrice: ""
+    });
+    useEffect(() => {
+       console.log(Productdata.ProductName) 
+       console.log(Productdata.Droplist) 
+    }, );
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -58,7 +69,9 @@ function AddProducts() {
                         <AntDesign name="camerao" size={80} style={{ color: "#828282" }} />
                     </View>
                     <View style={styles.inputs}>
-                        <TextInput placeholder='Item Name' placeholderTextColor={"#BDBABA"} style={{ padding: 0, color: "#000", fontSize: 16, textDecorationLine: "none" }} />
+                        <TextInput placeholder='Item Name' placeholderTextColor={"#BDBABA"}
+                            onChangeText={(e) => setProductdata({ ProductName: e })}
+                            style={{ padding: 0, color: "#000", fontSize: 16, textDecorationLine: "none" }} />
                     </View>
                     <View style={styles.inputs}>
                         <Dropdown
@@ -78,6 +91,7 @@ function AddProducts() {
                             itemTextStyle={styles.dropinnertext}
                             onChange={item => {
                                 setValue(item.value);
+                                setProductdata({Droplist:item.value})
                                 setIsFocus(false);
                             }}
                         />
@@ -86,7 +100,7 @@ function AddProducts() {
                         <TextInput
                             multiline={true}
                             numberOfLines={5}
-                            style={{ padding: 0 ,color:"#000",}}
+                            style={{ padding: 0, color: "#000", }}
                             placeholder='Describe this Item' placeholderTextColor={"#BDBABA"}
                         />
                     </View>
@@ -183,16 +197,16 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         marginTop: 7
     },
-    btn:{
-        marginTop:10,
+    btn: {
+        marginTop: 10,
         alignItems: "center"
     },
-    addproduct_btn:{
-        backgroundColor:"#61B846",
-        paddingHorizontal:20,
-        paddingVertical:15,
-        borderRadius:7
-        
+    addproduct_btn: {
+        backgroundColor: "#61B846",
+        paddingHorizontal: 20,
+        paddingVertical: 15,
+        borderRadius: 7
+
     }
 
 })
