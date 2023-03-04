@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     iconStyle: {
         width: 30,
         height: 40,
-        fontSize:10
+        // fontSize:10
     },
     dropinner: {
         backgroundColor: "#BDBABA"
