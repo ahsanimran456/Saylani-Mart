@@ -11,9 +11,10 @@ import {
     TouchableOpacity,
     Image,
 } from 'react-native';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { Dropdown } from 'react-native-element-dropdown';
+import firestore from '@react-native-firebase/firestore';
 function AddProducts() {
     const data = [
         { label: 'Item 1', value: '1' },
@@ -27,17 +28,46 @@ function AddProducts() {
     ];
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
-    const [Productdata, setProductdata] = useState({
-        ProductName: " ",
-        Droplist: " ",
-        ProductDescription: "",
-        UnitName: "",
-        UnitPrice: ""
-    });
-    useEffect(() => {
-       console.log(Productdata.ProductName) 
-       console.log(Productdata.Droplist) 
-    }, );
+    // const [Productdata, setProductdata] = useState({
+    //     ProductName: "",
+    //     Droplist: "",
+    //     ProductDescription: "",
+    //     UnitName: "",
+    //     UnitPrice: ""
+    // });
+    // useEffect(() => {
+    //     console.log(Productdata.ProductName)
+    //     console.log(Productdata.Droplist)
+    // },);
+    const [ProductName, setProductName] = useState();
+    const [ProDiscription, setProDiscription] = useState();
+    const [DropdownSelect, setDropdownSelect] = useState();
+    const [UnitName, setUnitName] = useState();
+    const [ProductPrice, setProductPrice] = useState();
+    const AddProduct = () => {
+        firestore()
+            .collection('Products')
+            .add({
+                ProductName:ProductName,
+                Droplist: DropdownSelect,
+                ProductDescription:ProDiscription,
+                UnitName: UnitName,
+                UnitPrice: ProductPrice
+            })
+            .then(() => {
+                console.log('User added!');
+                setProductName("")
+                setProDiscription("")
+                setDropdownSelect("")
+                setUnitName("")
+                setProductPrice("")
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+      
+        
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -70,8 +100,9 @@ function AddProducts() {
                     </View>
                     <View style={styles.inputs}>
                         <TextInput placeholder='Item Name' placeholderTextColor={"#BDBABA"}
-                            onChangeText={(e) => setProductdata({ ProductName: e })}
-                            style={{ padding: 0, color: "#000", fontSize: 16, textDecorationLine: "none" }} />
+                            onChangeText={(e) => setProductName(e)}
+                            underlineColorAndroid="transparent"
+                            style={{ padding: 0, color: "#000", fontSize: 16, textDecorationLine: "none", }} />
                     </View>
                     <View style={styles.inputs}>
                         <Dropdown
@@ -91,7 +122,8 @@ function AddProducts() {
                             itemTextStyle={styles.dropinnertext}
                             onChange={item => {
                                 setValue(item.value);
-                                setProductdata({Droplist:item.value})
+                                // setProductdata({ Droplist: item.value })
+                                setDropdownSelect(item.value)
                                 setIsFocus(false);
                             }}
                         />
@@ -102,22 +134,29 @@ function AddProducts() {
                             numberOfLines={5}
                             style={{ padding: 0, color: "#000", }}
                             placeholder='Describe this Item' placeholderTextColor={"#BDBABA"}
+                            underlineColorAndroid="transparent"
+
+                            onChangeText={(e) => setProDiscription(e)}
                         />
                     </View>
                     <View style={styles.unitinputs}>
                         <Text style={styles.headertext1}>
                             Unit Name:
                         </Text>
-                        <TextInput style={{ padding: 0, fontSize: 18, color: "#000" }} placeholder=" Pcs. / Kg / dozen" placeholderTextColor={"#BDBABA"} />
+                        <TextInput style={{ padding: 0, fontSize: 18, color: "#000" }}
+                            onChangeText={(e) => setUnitName(e)}
+                            placeholder=" Pcs. / Kg / dozen" placeholderTextColor={"#BDBABA"} />
                     </View>
                     <View style={styles.unitinputs}>
                         <Text style={styles.headertext1}>
                             Unit Price:
                         </Text>
-                        <TextInput style={{ padding: 0, fontSize: 18, color: "#000" }} placeholder="$3.22" placeholderTextColor={"#BDBABA"} />
+                        <TextInput style={{ padding: 0, fontSize: 18, color: "#000" }}
+                            onChangeText={(e) => setProductPrice(e)}
+                            placeholder="$3.22" placeholderTextColor={"#BDBABA"} />
                     </View>
                     <View style={styles.btn}>
-                        <TouchableOpacity style={styles.addproduct_btn} >
+                        <TouchableOpacity style={styles.addproduct_btn} onPress={AddProduct} >
                             <Text style={{ fontWeight: 700, fontSize: 18 }}>Add Product</Text>
                         </TouchableOpacity>
                     </View>
@@ -170,7 +209,8 @@ const styles = StyleSheet.create({
         color: "#BDBABA",
         borderRadius: 5,
         marginVertical: 5,
-        paddingVertical: 6
+        paddingVertical: 6,
+        textDecorationLine:'none',
     },
     dropdownplaceholder: {
         color: "#BDBABA"
