@@ -86,7 +86,7 @@ function AddProducts() {
                         <TextInput
                             multiline={true}
                             numberOfLines={5}
-                            style={{ padding: 0 ,color:"#000",fontSize}}
+                            style={{ padding: 0 ,color:"#000",}}
                             placeholder='Describe this Item' placeholderTextColor={"#BDBABA"}
                         />
                     </View>
